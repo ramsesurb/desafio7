@@ -9,9 +9,10 @@ class Contenedor {
    
     async getAll(){
         try {
-            const content =  await sql.getArticles()
-            console.log(content)
-            return content
+           await sql.getArticles()
+            .then(items=>{
+                console.table(items)
+              })
             
         } catch (error) {
         console.log(error)
@@ -71,6 +72,7 @@ class Contenedor {
 }
     
 const rute = new Contenedor ("productos.json")
+rute.getAll()
 export default Contenedor
 
 

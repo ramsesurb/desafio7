@@ -24,14 +24,14 @@ class ClienteSql {
         return this.knex ("productos").insert(products)
     }
 
- getArticles(){
+async getArticles(){
         try{
-        return   this.knex(`productos`).select(`*`)
-        console.log(productos)
+        return  await this.knex(`productos`).select(`*`)
+      
     }
         catch (error) {
             console.log(error)
-            return ["hola"]
+            return ["error"]
             }
     }
     close() {
