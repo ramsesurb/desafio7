@@ -1,7 +1,7 @@
 const options = {
     client: 'sqlite3',
     connection: {
-      filename: '../db/historialChat.sqlite'
+      filename: './historialChat.sqlite'
     },
     useNullAsDefault: true
   };

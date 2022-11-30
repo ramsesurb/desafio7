@@ -1,6 +1,22 @@
 [
   {
-    "nombre": "weweffwe",
-    "mensaje": "wefwefew"
+    "id_chat": 1,
+    "nombre": "Ram",
+    "mensaje": "how are you?"
+  },
+  {
+    "id_chat": 2,
+    "nombre": "Ale",
+    "mensaje": "muy bien y tu?"
+  },
+  {
+    "id_chat": 3,
+    "nombre": "Ram",
+    "mensaje": "Bien, gracias"
+  },
+  {
+    "id_chat": 4,
+    "nombre": "Ale",
+    "mensaje": "Cool!"
   }
 ]

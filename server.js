@@ -15,6 +15,15 @@ const io = new IOServer(httpServer);
 
 const mensajes = [];
 
+const ClienteSqlChat = require("./model/sqlLite3")
+const { options } = require ('./config/sqlLite.js')
+const Sql = new ClienteSqlChat(options)
+
+//Sql.createTableChat()
+//.then(()=>{
+//  console.log("tabla Chat creada")
+//})
+//
 
 
 app.use(express.static(__dirname + '/public'));
