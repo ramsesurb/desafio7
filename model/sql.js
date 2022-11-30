@@ -1,32 +1,34 @@
-import knexLib from 'knex'; 
+const { options } = require ('../config/mariaDB.js')
+const knex = require('knex')(options);
+
 
 class ClienteSql {
-
-    constructor(config){
-        this.knex = knexLib(config)
-    }
-
+    
     async createTable (){
+        
         try {
-            return await this.knex.schema.dropTableIfExists(`productos`);
+            
+            return await knex.schema.dropTableIfExists(`productos`);
         } finally {
-            return await this.knex.schema.createTable(`productos`, table => {
+            return await knex.schema.createTable(`productos`, table => {
                 table.increments("id_producto").primary();
                 table.string("title", 50).notNullable();
-                table.string("thumbnail", 50).notNullable();
+                table.string("thumbnail", 100).notNullable();
                 table.float("price", 50).notNullable();
                 table.integer("stock", 50).notNullable();
             });
         } 
     }
-    insertProducts(products){
+    async insertProducts(products){
         
-        return this.knex ("productos").insert(products)
+        await knex("productos").insert(products)
+        .then(() => console.log('Producto agregado'))
     }
 
-async getArticles(){
+    async getArticles(){
         try{
-        return  await this.knex(`productos`).select(`*`)
+            const list = await knex.from('productos').select('*')
+            return list
       
     }
         catch (error) {
@@ -35,8 +37,10 @@ async getArticles(){
             }
     }
     close() {
-        return this.knex.destroy();
+        return knex.destroy();
       }
 
 }
-export default ClienteSql;
+
+
+module.exports = ClienteSql

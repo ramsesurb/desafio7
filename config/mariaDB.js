@@ -1,4 +1,4 @@
-export const config ={
+ const options ={
 
     client:"mysql",
     connection: {
@@ -8,3 +8,7 @@ export const config ={
         database:"productos"
     }
 }
+ module.exports = { options }
+
+
+

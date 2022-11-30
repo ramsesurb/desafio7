@@ -1,18 +1,15 @@
 
-import { promises as fs } from 'fs';
+const { promises: fs } = require('fs');
+const ClienteSql = require("./model/sql")
+const Sql = new ClienteSql 
 
-import ClienteSql from "./model/sql.js"
-import { config } from "./config/mariaDB.js";
-const sql = new ClienteSql(config);
 
 class Contenedor {
    
     async getAll(){
         try {
-           await sql.getArticles()
-            .then(items=>{
-                console.table(items)
-              })
+            const content = await Sql.getArticles()
+            return content
             
         } catch (error) {
         console.log(error)
@@ -58,9 +55,9 @@ class Contenedor {
         try {
             const saveCont = await this.getAll()
             const lastId = saveCont.length
-            const producto = {id:(lastId+1), title: prod.title ,price: prod.price, thumbnail: prod.thumbnail }
-            await saveCont.push(producto)
-            await fs.writeFile(`./api/productos.json`, JSON.stringify(saveCont ,null, 2))
+            const newProduct = {id_producto:(lastId+1), title: prod.title ,price: prod.price, thumbnail: prod.thumbnail,stock:8 }
+            await saveCont.push(newProduct)
+            await Sql.insertProducts (newProduct)
             return saveCont
            
         } catch (error) {
@@ -72,7 +69,6 @@ class Contenedor {
 }
     
 const rute = new Contenedor ("productos.json")
-rute.getAll()
-export default Contenedor
+module.exports = Contenedor
 
 
